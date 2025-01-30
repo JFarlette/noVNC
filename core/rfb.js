@@ -2248,6 +2248,7 @@ export default class RFB extends EventTargetMixin {
 
         if (this._fbDepth == 24) {
             encs.push(encodings.pseudoEncodingVMwareCursor);
+            encs.push(encodings.pseudoEncodingPointerPosition);   
             encs.push(encodings.pseudoEncodingCursor);
         }
 
@@ -2657,6 +2658,9 @@ export default class RFB extends EventTargetMixin {
             case encodings.pseudoEncodingVMwareCursor:
                 return this._handleVMwareCursor();
 
+            case encodings.pseudoEncodingPointerPosition:
+                return this._handlePointerPosition();
+
             case encodings.pseudoEncodingCursor:
                 return this._handleCursor();
 
@@ -2799,6 +2803,11 @@ export default class RFB extends EventTargetMixin {
 
         this._updateCursor(rgba, hotx, hoty, w, h);
 
+        return true;
+    }
+
+    _handlePointerPosition() {
+        // Nothing to do...        
         return true;
     }
 
